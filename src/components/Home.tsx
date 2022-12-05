@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+
 import styled from 'styled-components'
 import { Movie } from '../types/common';
 import MovieCard from './MovieCard'
@@ -19,11 +19,10 @@ export default function Home(props: { data: Movie[], setData: any, filteredValue
   }
 
   return (
-    <>
+    <Div>
       <SearchBar setFilteredValue={props.setFilteredValue} filteredValue={props.filteredValue} placeholder="Search for movies or TV series"></SearchBar>
       <H1>Recommended for you</H1>
       <RecomendedBox>
-
         {array.map((item: Movie) =>
           <MovieCard key={item.title}
             imgSrc={item.isTrending ? process.env.PUBLIC_URL + item.thumbnail.regular.small : process.env.PUBLIC_URL + item.thumbnail.regular.small}
@@ -37,12 +36,23 @@ export default function Home(props: { data: Movie[], setData: any, filteredValue
           />
         )}
       </RecomendedBox>
-    </>
+    </Div>
+
   )
 }
 
 
+const Div = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  @media (min-width: 1440px){
+  width: 100%;
+  margin-left: 8%;
+  }
+`
 
 const H1 = styled.h1`
   font-family: Outfit;
@@ -54,6 +64,11 @@ const H1 = styled.h1`
   color:white;
   width: 92%;
   margin:24px 0;
+
+  @media (min-width: 768px){
+  font-size: 32px;
+  line-height: 40px;
+  }
 
 `
 

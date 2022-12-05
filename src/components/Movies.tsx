@@ -24,7 +24,7 @@ export default function Movies(props: { data: Movie[], setData: any, filteredVal
   }
 
   return (
-    <>
+    <Div>
       <SearchBar setFilteredValue={props.setFilteredValue} filteredValue={props.filteredValue} placeholder='Search for movies'></SearchBar>
       <H1>Movies</H1>
       <MoviesBox>
@@ -41,11 +41,21 @@ export default function Movies(props: { data: Movie[], setData: any, filteredVal
           />
         )}
       </MoviesBox>
-    </>
+    </Div>
   )
 }
 
+const Div = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  @media (min-width: 1440px){
+  width: 100%;
+  margin-left: 8%;
+  }
+`
 
 const H1 = styled.h1`
   font-family: Outfit;
@@ -57,6 +67,11 @@ const H1 = styled.h1`
   color:white;
   width: 92%;
   margin:24px 0;
+
+  @media (min-width: 768px){
+  font-size: 32px;
+  line-height: 40px;
+  }
 
 `
 

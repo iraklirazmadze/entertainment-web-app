@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes, Link, useNavigate } from "react-router-dom";
+import { Route, Routes, Link, } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./assets/logo.svg"
 import avatar from "./assets/image-avatar.png"
@@ -12,8 +12,7 @@ import { Movie } from './types/common';
 
 function App() {
 
-
-  const [navbarMenu, setnavbarMenu] = useState(window.location.pathname);
+  const [navbarMenu, setnavbarMenu] = useState("/");
   const [data, setData] = useState<Movie[]>(database);
   const [filteredValue, setFilteredValue] = useState<string>('');
 
@@ -70,6 +69,13 @@ const MainPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (min-width: 1440px){
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 32px;
+  box-sizing: border-box;
+  }
 `
 const Header = styled.header`
   display: flex;
@@ -77,12 +83,27 @@ const Header = styled.header`
   background-color: #161D2F;
   width: 100%;
   box-sizing: border-box;
-  padding: 16px 4% 16px 4%;
+  padding: 23px 4% 23px 4%;
   justify-content: space-between;
+  position: relative;
+
+  @media (min-width: 1440px){
+  flex-direction: column;
+  width: 96px;
+  height: 93vh;
+  position: fixed;
+  border-radius: 20px;
+
+  }
+  
 `
 
 const Logo = styled.img`
   width: 25px;
+
+  @media (min-width: 768px){
+    width: 32px;
+  }
 `
 
 const NavigationBar = styled.div`
@@ -90,13 +111,40 @@ const NavigationBar = styled.div`
   align-items: center;
   column-gap: 24px;
 
-  > svg{
+  @media (min-width: 768px){
+    column-gap: 32px;
+
+    >svg{
+      width: 40px;
+    }
+  }
+
+  @media (min-width: 1440px){
+  flex-direction: column;
+  row-gap: 40px;
+  position: absolute;
+  top:18vh;
+  }
+
+  >svg{
     cursor: pointer;
+    @media (min-width: 768px){
+      width: 100px;
+    }
+
   }
 
 `
 
 const Avatar = styled.img`
   width: 24px;
+
+  @media (min-width: 768px){
+    width: 32px;
+  }
+
+  @media (min-width: 1440px){
+  width: 40px;
+  }
 `
 

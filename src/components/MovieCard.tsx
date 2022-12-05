@@ -5,6 +5,7 @@ import iconBookmarkEmpty from "../assets/icon-bookmark-empty.svg"
 import iconBookmarkFull from "../assets/icon-bookmark-full.svg"
 import iconMovie from "../assets/icon-category-movie.svg"
 import iconTv from "../assets/icon-category-tv.svg"
+import iconPlay from "../assets/icon-play.svg"
 
 export default function MovieCard(props: MoviecardProps) {
   const handleCick = (title: any) => {
@@ -22,10 +23,18 @@ export default function MovieCard(props: MoviecardProps) {
 
   return (
     <MainCard id={props.title}>
-      <BgImg src={props.imgSrc} alt=""></BgImg>
-      <BookmarkIconBox onClick={() => handleCick(props.title)}>
-        <BookmarkIcon src={props.bookmarkValue ? iconBookmarkFull : iconBookmarkEmpty}></BookmarkIcon>
-      </BookmarkIconBox>
+      <ImgBox>
+        <BgImg src={props.imgSrc} alt=""></BgImg>
+        <PlayerHover>
+          <PlayBox>
+            <img src={iconPlay} />
+            <span>Play</span>
+          </PlayBox>
+        </PlayerHover>
+        <BookmarkIconBox onClick={() => handleCick(props.title)}>
+          <BookmarkIcon src={props.bookmarkValue ? iconBookmarkFull : iconBookmarkEmpty}></BookmarkIcon>
+        </BookmarkIconBox>
+      </ImgBox>
       <Information>
         <ReleaseYear>{props.releaseYear}</ReleaseYear>
         <div style={{ width: "2px", height: "2px", borderRadius: "50%", backgroundColor: "rgba(255, 255, 255, 0.75)" }}></div>
@@ -43,6 +52,14 @@ export default function MovieCard(props: MoviecardProps) {
 const MainCard = styled.div`
   width: 48%;
   position: relative;
+  @media (min-width: 768px){
+    width: 30.6%;
+  }
+
+  @media (min-width: 1440px){
+    width: 22%;
+  }
+  
 `
 
 const BgImg = styled.img`
@@ -63,6 +80,15 @@ const BookmarkIconBox = styled.div`
   justify-content: center;
   z-index: 1;
   cursor: pointer;
+
+  &:hover{
+    background:rgba(16, 20, 30);
+  }
+
+  @media (min-width: 768px){
+    top:16px;
+    right: 16px;
+  }
 ;
 `
 const BookmarkIcon = styled.img`
@@ -84,6 +110,11 @@ const ReleaseYear = styled.span`
   text-align: left;
   color: rgba(255, 255, 255, 0.75);
 
+  @media (min-width: 768px){
+    font-size: 13px;
+    line-height: 16px;
+  }
+
 
 `
 
@@ -99,4 +130,57 @@ const Title = styled.div`
   letter-spacing: 0px;
   text-align: left;
   color:white;
+
+  @media (min-width: 768px){
+    font-size: 18px;
+    line-height: 23px;
+  }
 `
+
+const ImgBox = styled.div`
+  position: relative;
+`
+
+const PlayBox = styled.div`
+  height: 48px;
+  width: 40%;
+  background-color:rgba(255, 255, 255, 0.25);
+  display: none;
+  border-radius: 28px;
+  padding: 9px;
+  box-sizing: border-box; 
+  align-items: center;
+
+  >span{
+font-family: Outfit;
+font-size: 18px;
+font-weight: 500;
+line-height: 23px;
+letter-spacing: 0px;
+text-align: left;
+color:white;
+margin-left: 15%;
+
+  }
+`
+
+const PlayerHover = styled.div`
+
+  position: absolute;
+  width: 100%;
+  height:98.2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  top:0;
+  cursor: pointer;
+ 
+  &:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  &:hover ${PlayBox}{
+    display: flex;
+  }
+`
+

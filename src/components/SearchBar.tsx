@@ -26,6 +26,9 @@ const SearchBarDiv = styled.div`
 
   >img{
     width: 24px;
+    @media (min-width: 768px){
+    width: 32px;
+  }
   }
 `
 
@@ -40,4 +43,9 @@ text-align: left;
 background-color: #10141E;
 color:rgba(255, 255, 255, 0.5);
 outline:none;
+
+@media (min-width: 768px){
+    font-size: 24px;
+    line-height: 30px;
+  }
 `
