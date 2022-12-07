@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Movie } from '../types/common';
 import MovieCard from './MovieCard'
 import SearchBar from './SearchBar';
+import TrendingShows from './TrendingShows';
 
 export default function Home(props: { data: Movie[], setData: any, filteredValue: string, setFilteredValue: any }) {
 
@@ -17,13 +18,37 @@ export default function Home(props: { data: Movie[], setData: any, filteredValue
       }
     })
   }
+  let TrendingArray: Movie[] = [];
+  let RecomendedArray: Movie[] = [];
+  array.map((item: Movie) => {
+    if (item.isTrending) {
+      TrendingArray.push(item);
+    } else {
+      RecomendedArray.push(item);
+    }
+  })
 
   return (
     <Div>
       <SearchBar setFilteredValue={props.setFilteredValue} filteredValue={props.filteredValue} placeholder="Search for movies or TV series"></SearchBar>
+      <H1>Trending</H1>
+      <TrendingBox>
+        {TrendingArray.map((item: Movie) =>
+          <TrendingShows key={item.title}
+            imgSrc={item.isTrending ? process.env.PUBLIC_URL + `${item.thumbnail.trending?.small}` : process.env.PUBLIC_URL + item.thumbnail.regular.medium}
+            bookmarkValue={item.isBookmarked}
+            releaseYear={item.year}
+            type={item.category}
+            rating={item.rating}
+            title={item.title}
+            data={props.data}
+            setData={props.setData}
+          />
+        )}
+      </TrendingBox>
       <H1>Recommended for you</H1>
       <RecomendedBox>
-        {array.map((item: Movie) =>
+        {RecomendedArray.map((item: Movie) =>
           <MovieCard key={item.title}
             imgSrc={item.isTrending ? process.env.PUBLIC_URL + item.thumbnail.regular.small : process.env.PUBLIC_URL + item.thumbnail.regular.small}
             bookmarkValue={item.isBookmarked}
@@ -47,7 +72,7 @@ const Div = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  overflow: hidden;
   @media (min-width: 1440px){
   width: 100%;
   margin-left: 8%;
@@ -70,6 +95,16 @@ const H1 = styled.h1`
   line-height: 40px;
   }
 
+`
+
+const TrendingBox = styled.div`
+  width: max-content;
+  display: flex;
+  align-self: flex-start;
+  margin-left: 4vw;
+  column-gap: 4vw;
+  margin-bottom: 30px;
+  overflow: hidden;
 `
 
 const RecomendedBox = styled.div`

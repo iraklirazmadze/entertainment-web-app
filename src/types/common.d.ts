@@ -26,5 +26,6 @@ export type MoviecardProps = {
     rating: string,
     title: string
     data: Array,
-    setData?: any
+    setData?: any,
+    isTrending?: boolean
 }

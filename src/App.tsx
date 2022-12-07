@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Route, Routes, Link, } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Route, Routes, Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./assets/logo.svg"
 import avatar from "./assets/image-avatar.png"
@@ -11,10 +11,18 @@ import database from "./data.json";
 import { Movie } from './types/common';
 
 function App() {
+  const location = useLocation();
+  console.log(location);
+  const navigate = useNavigate();
+
 
   const [navbarMenu, setnavbarMenu] = useState("/");
   const [data, setData] = useState<Movie[]>(database);
   const [filteredValue, setFilteredValue] = useState<string>('');
+  useEffect(() => {
+    navigate("/");
+
+  }, [])
 
 
 

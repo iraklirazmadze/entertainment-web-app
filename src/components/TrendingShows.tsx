@@ -20,6 +20,8 @@ export default function MovieCard(props: MoviecardProps) {
     })
     props.setData(newArray)
   }
+  console.log(window.innerWidth)
+
 
   return (
     <MainCard id={props.title}>
@@ -50,7 +52,8 @@ export default function MovieCard(props: MoviecardProps) {
 
 
 const MainCard = styled.div`
-  width: 48%;
+  width: 64vw;
+  max-width: 470px;
   position: relative;
   @media (min-width: 768px){
     width: 30.6%;
@@ -63,8 +66,10 @@ const MainCard = styled.div`
 `
 
 const BgImg = styled.img`
-  width: 100%;
+  width: 64vw;
+  max-width: 470px;
   border-radius: 8px;
+
 `
 
 const BookmarkIconBox = styled.div`
@@ -99,15 +104,20 @@ const Information = styled.div`
   align-items: center;
   column-gap: 6px;
   margin:8px 0 4px 0;
+  position:absolute;
+  bottom:25%;
+  left :8%;
+
 `
 
 const ReleaseYear = styled.span`
   font-family: Outfit;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 300;
-  line-height: 14px;
+  line-height: 15px;
   letter-spacing: 0px;
   text-align: left;
+
   color: rgba(255, 255, 255, 0.75);
 
   @media (min-width: 768px){
@@ -124,12 +134,16 @@ const Rating = ReleaseYear
 
 const Title = styled.div`
   font-family: Outfit;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: 0px;
-  text-align: left;
+font-size: 15px;
+font-weight: 500;
+line-height: 19px;
+letter-spacing: 0px;
+text-align: left;
+
   color:white;
+  position: absolute;
+  bottom:10%;
+  left:8%;
 
   @media (min-width: 768px){
     font-size: 18px;
@@ -138,6 +152,7 @@ const Title = styled.div`
 `
 
 const ImgBox = styled.div`
+  width: 100%;
   position: relative;
 `
 
@@ -161,7 +176,8 @@ letter-spacing: 0px;
 text-align: left;
 color:white;
 margin-left: 15%;
-margin-left: 9px;
+margin-right: 9px;
+
   }
 `
 
