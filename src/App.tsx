@@ -20,9 +20,8 @@ function App() {
   const [data, setData] = useState<Movie[]>(database);
   const [filteredValue, setFilteredValue] = useState<string>('');
   useEffect(() => {
-    navigate("/");
-
   }, [])
+  console.log(window.location.hostname)
 
 
 

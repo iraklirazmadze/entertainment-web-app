@@ -20,7 +20,7 @@ export default function MovieCard(props: MoviecardProps) {
     })
     props.setData(newArray)
   }
-  console.log(window.innerWidth)
+
 
 
   return (
