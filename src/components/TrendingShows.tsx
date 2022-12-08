@@ -30,7 +30,7 @@ export default function MovieCard(props: MoviecardProps) {
         <PlayerHover>
           <PlayBox>
             <img src={iconPlay} />
-            {window.innerWidth > 400 ? <span>Play</span> : null}
+            <span>Play</span>
           </PlayBox>
         </PlayerHover>
         <BookmarkIconBox onClick={() => handleCick(props.title)}>
@@ -55,13 +55,7 @@ const MainCard = styled.div`
   width: 64vw;
   max-width: 470px;
   position: relative;
-  @media (min-width: 768px){
-    width: 30.6%;
-  }
-
-  @media (min-width: 1440px){
-    width: 22%;
-  }
+  
   
 `
 
@@ -158,7 +152,7 @@ const ImgBox = styled.div`
 
 const PlayBox = styled.div`
   height: 48px;
-  width: 40%;
+  width: max-content;
   max-width: 117px;
   background-color:rgba(255, 255, 255, 0.25);
   display: none;
@@ -167,30 +161,38 @@ const PlayBox = styled.div`
   box-sizing: border-box; 
   align-items: center;
 
-  >span{
-font-family: Outfit;
-font-size: 18px;
-font-weight: 500;
-line-height: 23px;
-letter-spacing: 0px;
-text-align: left;
-color:white;
-margin-left: 15%;
-margin-right: 9px;
+  @media (min-width: 375px){
+    width: 40%;
+  }
 
+  >span{
+    font-family: Outfit;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 23px;
+    letter-spacing: 0px;
+    text-align: left;
+    color:white;
+    margin-left: 15%;
+    margin-right: 9px;
+    display: none;
+
+    @media (min-width: 375px){
+    display: flex;
+  }
   }
 `
 
 const PlayerHover = styled.div`
 
   position: absolute;
+  top:0;
   width: 100%;
-  height:98.2%;
+  height:100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  top:0;
   cursor: pointer;
  
   &:hover{

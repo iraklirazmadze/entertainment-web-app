@@ -28,7 +28,7 @@ export default function MovieCard(props: MoviecardProps) {
         <PlayerHover>
           <PlayBox>
             <img src={iconPlay} />
-            {window.innerWidth > 400 ? <span>Play</span> : null}
+            <span>Play</span>
           </PlayBox>
         </PlayerHover>
         <BookmarkIconBox onClick={() => handleCick(props.title)}>
@@ -143,7 +143,7 @@ const ImgBox = styled.div`
 
 const PlayBox = styled.div`
   height: 48px;
-  width: 40%;
+  width: max-content;
   max-width: 117px;
   background-color:rgba(255, 255, 255, 0.25);
   display: none;
@@ -151,6 +151,10 @@ const PlayBox = styled.div`
   padding: 9px;
   box-sizing: border-box; 
   align-items: center;
+
+  @media (min-width: 520px){
+    width: 40%;
+  }
 
   >span{
 font-family: Outfit;
@@ -162,6 +166,11 @@ text-align: left;
 color:white;
 margin-left: 15%;
 margin-left: 9px;
+display: none;
+
+    @media (min-width: 520px){
+      display: flex;
+    }
   }
 `
 
@@ -169,7 +178,7 @@ const PlayerHover = styled.div`
 
   position: absolute;
   width: 100%;
-  height:98.2%;
+  height:99%;
   display: flex;
   justify-content: center;
   align-items: center;

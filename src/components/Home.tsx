@@ -1,16 +1,20 @@
 
+import { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import { Movie } from '../types/common';
 import MovieCard from './MovieCard'
 import SearchBar from './SearchBar';
 import TrendingShows from './TrendingShows';
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+
 
 export default function Home(props: { data: Movie[], setData: any, filteredValue: string, setFilteredValue: any }) {
 
 
   let array: Movie[] = [];
   if (props.filteredValue === '') {
-    array = [...props.data];
+    array = props.data;
   } else {
     props.data.map((item: Movie) => {
       if (item.title.toLocaleLowerCase().includes(props.filteredValue)) {
@@ -18,13 +22,13 @@ export default function Home(props: { data: Movie[], setData: any, filteredValue
       }
     })
   }
-  let TrendingArray: Movie[] = [];
-  let RecomendedArray: Movie[] = [];
+  let trendingArray: Movie[] = [];
+  let recomendedArray: Movie[] = [];
   array.map((item: Movie) => {
     if (item.isTrending) {
-      TrendingArray.push(item);
+      trendingArray.push(item);
     } else {
-      RecomendedArray.push(item);
+      recomendedArray.push(item);
     }
   })
 
@@ -33,22 +37,48 @@ export default function Home(props: { data: Movie[], setData: any, filteredValue
       <SearchBar setFilteredValue={props.setFilteredValue} filteredValue={props.filteredValue} placeholder="Search for movies or TV series"></SearchBar>
       <H1>Trending</H1>
       <TrendingBox>
-        {TrendingArray.map((item: Movie) =>
-          <TrendingShows key={item.title}
-            imgSrc={item.isTrending ? process.env.PUBLIC_URL + `${item.thumbnail.trending?.small}` : process.env.PUBLIC_URL + item.thumbnail.regular.medium}
-            bookmarkValue={item.isBookmarked}
-            releaseYear={item.year}
-            type={item.category}
-            rating={item.rating}
-            title={item.title}
-            data={props.data}
-            setData={props.setData}
-          />
-        )}
+        <Splide options={{
+          fixedWidth: "470px",
+          autoplay: true,
+          perMove: 1,
+          interval: 1500,
+          pagination: true,
+          arrows: false,
+          direction: "ltr",
+          pauseOnFocus: true,
+          pauseOnHover: true,
+          type: "loop",
+          start: 0,
+          gap: "40px",
+          breakpoints: {
+            768: {
+              fixedWidth: "64vw",
+              gap: "4vw"
+            }
+          },
+
+        }}
+        >
+
+          {trendingArray.map((item: Movie) =>
+            <SplideSlide key={item.title}>
+              <TrendingShows
+                imgSrc={item.isTrending ? process.env.PUBLIC_URL + `${item.thumbnail.trending?.small}` : process.env.PUBLIC_URL + item.thumbnail.regular.medium}
+                bookmarkValue={item.isBookmarked}
+                releaseYear={item.year}
+                type={item.category}
+                rating={item.rating}
+                title={item.title}
+                data={props.data}
+                setData={props.setData}
+              />
+            </SplideSlide>
+          )}
+        </Splide>
       </TrendingBox>
       <H1>Recommended for you</H1>
       <RecomendedBox>
-        {RecomendedArray.map((item: Movie) =>
+        {recomendedArray.map((item: Movie) =>
           <MovieCard key={item.title}
             imgSrc={item.isTrending ? process.env.PUBLIC_URL + item.thumbnail.regular.small : process.env.PUBLIC_URL + item.thumbnail.regular.small}
             bookmarkValue={item.isBookmarked}
