@@ -21,7 +21,6 @@ function App() {
   const [filteredValue, setFilteredValue] = useState<string>('');
   useEffect(() => {
   }, [])
-  console.log(window.location.hostname)
 
 
 
